@@ -1,10 +1,16 @@
 {
   "name": "eslint-plugin-unocss",
-  "version": "0.0.1",
-  "description": "ESLint plugin for Unocss",
+  "version": "0.0.1-alpha.0",
+  "license": "MIT",
+  "description": "ESLint plugin for UnoCSS",
+  "homepage": "https://github.com/devunt/eslint-plugin-unocss#readme",
+  "author": "Bae Junehyeon <devunt@gmail.com>",
+  "repository": { "type": "git", "url": "https://github.com/devunt/eslint-plugin-unocss.git" },
   "main": "./dist/index.js",
+  "files": ["dist"],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepublish": "pnpm build"
   },
   "keywords": [
     "eslint",
@@ -12,8 +18,6 @@
     "eslint-plugin",
     "unocss"
   ],
-  "author": "Bae Junehyeon <devunt@gmail.com>",
-  "license": "MIT",
   "devDependencies": {
     "@types/node": "^18.7.15",
     "@typescript-eslint/utils": "^5.36.1",
