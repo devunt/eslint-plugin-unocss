@@ -1,7 +1,8 @@
 # ESLint plugin for UnoCSS
 
 This is a proof of concept ESLint plugin for [UnoCSS](https://github.com/unocss/unocss).
-**Not ready for production use**
+
+**Not ready for production use yet**
 
 ## Installation
 
