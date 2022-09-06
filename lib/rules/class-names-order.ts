@@ -54,7 +54,7 @@ export default ESLintUtils.RuleCreator((name) => name)({
           context.report({
             node,
             messageId: 'invalidOrder',
-            // fix: (fixer) => fixer.replaceText(value, `'${orderedClassName}'`),
+            fix: (fixer) => fixer.replaceText(node, `'${orderedClassName}'`),
           });
         }
       },

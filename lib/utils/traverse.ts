@@ -27,7 +27,7 @@ export const traverseClassName: TraverseClassName = ({ visitor }) => {
           return;
         }
 
-        visitor(node, className);
+        visitor(value, className);
       }
     },
   };
