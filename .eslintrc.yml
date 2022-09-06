@@ -1,0 +1,16 @@
+extends:
+  - universe/node
+  - plugin:eslint-plugin/recommended
+
+plugins:
+  - unused-imports
+
+parserOptions:
+  sourceType: module
+
+rules:
+  sort-imports:
+    - warn
+    - ignoreDeclarationSort: true
+  import/newline-after-import: warn
+  unused-imports/no-unused-imports: warn

@@ -1,0 +1,35 @@
+{
+  "name": "eslint-plugin-unocss",
+  "version": "0.0.1",
+  "description": "ESLint plugin for Unocss",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "unocss"
+  ],
+  "author": "Bae Junehyeon <devunt@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.7.15",
+    "@typescript-eslint/utils": "^5.36.1",
+    "eslint": "^8.23.0",
+    "eslint-config-universe": "^11.1.0",
+    "eslint-plugin-eslint-plugin": "^5.0.6",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.2"
+  },
+  "peerDependencies": {
+    "eslint": "^8.0.0"
+  },
+  "dependencies": {
+    "@unocss/config": "^0.45.15",
+    "@unocss/core": "^0.45.15",
+    "synckit": "^0.8.4"
+  }
+}
