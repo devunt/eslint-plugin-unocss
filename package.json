@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-unocss",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "license": "MIT",
   "description": "ESLint plugin for UnoCSS",
   "homepage": "https://github.com/devunt/eslint-plugin-unocss#readme",
