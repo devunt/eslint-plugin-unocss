@@ -10,7 +10,7 @@ const pattern = / *\.(?<selector>\S+?)\{/;
 const generateCSS = createSyncFn<(className: string) => Promise<string>>(require.resolve('../workers/css'));
 
 export default ESLintUtils.RuleCreator((name) => name)({
-  name: 'class-names-order',
+  name: 'classnames-order',
   meta: {
     type: 'layout',
     fixable: 'code',
@@ -19,14 +19,14 @@ export default ESLintUtils.RuleCreator((name) => name)({
       recommended: false,
     },
     messages: {
-      invalidOrder: 'Class names are not ordered',
+      'invalid-order': 'Class names are not ordered',
     },
     schema: [],
   },
   defaultOptions: [],
   create: (context) => {
     return traverseClassName({
-      rule: 'class-names-order',
+      rule: 'classnames-order',
       visitor: (node, className) => {
         const sanitizedClassName = sanitizeClassName(className);
 
@@ -57,7 +57,7 @@ export default ESLintUtils.RuleCreator((name) => name)({
         if (sanitizedClassName !== orderedClassName) {
           context.report({
             node,
-            messageId: 'invalidOrder',
+            messageId: 'invalid-order',
             fix: (fixer) => fixer.replaceText(node, `'${orderedClassName}'`),
           });
 

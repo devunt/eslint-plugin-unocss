@@ -6,8 +6,8 @@ export default {
     },
   },
   rules: {
-    'unocss/class-names-order': 'warn',
-    'unocss/duplicated-class-names': 'warn',
+    'unocss/classnames-order': 'warn',
+    'unocss/no-duplicated-classnames': 'warn',
     'unocss/no-excessive-whitespaces': 'warn',
   },
 };

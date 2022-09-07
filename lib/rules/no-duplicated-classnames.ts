@@ -6,7 +6,7 @@ import { sanitizeClassName } from '../utils/classname';
 import { traverseClassName } from '../utils/traverse';
 
 export default ESLintUtils.RuleCreator((name) => name)({
-  name: 'duplicated-class-names',
+  name: 'no-duplicated-classnames',
   meta: {
     type: 'layout',
     fixable: 'code',
@@ -15,14 +15,14 @@ export default ESLintUtils.RuleCreator((name) => name)({
       recommended: false,
     },
     messages: {
-      classNameDuplicated: 'Class name is duplicated',
+      'duplicated-classnames': 'Class name is duplicated',
     },
     schema: [],
   },
   defaultOptions: [],
   create: (context) => {
     return traverseClassName({
-      rule: 'duplicated-class-names',
+      rule: 'no-duplicated-classnames',
       visitor: (node, className) => {
         const classNames = sanitizeClassName(expandVariantGroup(className)).split(' ');
         const uniqueClassNames = uniq(classNames);
@@ -30,7 +30,7 @@ export default ESLintUtils.RuleCreator((name) => name)({
         if (classNames.length !== uniqueClassNames.length) {
           context.report({
             node,
-            messageId: 'classNameDuplicated',
+            messageId: 'duplicated-classnames',
           });
 
           return false;
