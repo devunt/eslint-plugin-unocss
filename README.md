@@ -21,6 +21,6 @@ extends:
 
 ## Exported rules
 
-- `unocss/class-names-order` - Enforce a specific order for class names in your code.
-- `unocss/duplicated-class-names` - Disallow duplicate class names in your code.
+- `unocss/classnames-order` - Enforce a specific order for class names in your code.
+- `unocss/no-duplicated-classnames` - Disallow duplicate class names in your code.
 - `unocss/no-excessive-whitespaces` - Disallow excessive whitespaces in your code.
