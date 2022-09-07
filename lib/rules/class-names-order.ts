@@ -25,6 +25,7 @@ export default ESLintUtils.RuleCreator((name) => name)({
   defaultOptions: [],
   create: (context) => {
     return traverseClassName({
+      rule: 'class-names-order',
       visitor: async (node, className) => {
         const expandedClassName = expandVariantGroup(className);
         const css = generateCSS(expandedClassName);

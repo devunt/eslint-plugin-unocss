@@ -21,6 +21,7 @@ export default ESLintUtils.RuleCreator((name) => name)({
   defaultOptions: [],
   create: (context) => {
     return traverseClassName({
+      rule: 'duplicated-class-names',
       visitor: async (node, className) => {
         const classNames = expandVariantGroup(className).split(' ');
         const uniqueClassNames = uniq(classNames);

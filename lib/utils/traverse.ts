@@ -1,14 +1,18 @@
 import { TSESTree } from '@typescript-eslint/utils';
 import { RuleListener } from '@typescript-eslint/utils/dist/ts-eslint';
 
+import { hash } from './hash';
+
+const traversedClassNameHashes = new Set<string>();
+
 type TraverseClassNameArgs = {
-  // context: RuleContext;
+  rule: string;
   visitor: (node: TSESTree.Node, className: string) => void;
 };
 
 type TraverseClassName = (args: TraverseClassNameArgs) => RuleListener;
 
-export const traverseClassName: TraverseClassName = ({ visitor }) => {
+export const traverseClassName: TraverseClassName = ({ rule, visitor }) => {
   return {
     JSXAttribute: async (node) => {
       const {
@@ -27,7 +31,11 @@ export const traverseClassName: TraverseClassName = ({ visitor }) => {
           return;
         }
 
-        visitor(value, className);
+        const hashedClassName = hash(`${rule}:${className}`);
+        if (!traversedClassNameHashes.has(hashedClassName)) {
+          visitor(value, className);
+          traversedClassNameHashes.add(hashedClassName);
+        }
       }
     },
   };
