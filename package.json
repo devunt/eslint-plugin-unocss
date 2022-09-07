@@ -9,7 +9,7 @@
   "main": "./dist/index.js",
   "files": ["dist"],
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf ./dist && tsc",
     "prepublish": "pnpm build"
   },
   "keywords": [
