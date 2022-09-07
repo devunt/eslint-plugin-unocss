@@ -7,7 +7,7 @@ const traversedClassNameHashes = new Set<string>();
 
 type TraverseClassNameArgs = {
   rule: string;
-  visitor: (node: TSESTree.Node, className: string) => void;
+  visitor: (node: TSESTree.Node, className: string) => boolean;
 };
 
 type TraverseClassName = (args: TraverseClassNameArgs) => RuleListener;
@@ -33,8 +33,9 @@ export const traverseClassName: TraverseClassName = ({ rule, visitor }) => {
 
         const hashedClassName = hash(`${rule}:${className}`);
         if (!traversedClassNameHashes.has(hashedClassName)) {
-          visitor(value, className);
-          traversedClassNameHashes.add(hashedClassName);
+          if (visitor(value, className)) {
+            traversedClassNameHashes.add(hashedClassName);
+          }
         }
       }
     },

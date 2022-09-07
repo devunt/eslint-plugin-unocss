@@ -3,6 +3,7 @@ import { expandVariantGroup } from '@unocss/core';
 import { createSyncFn } from 'synckit';
 
 import { generateClassNameFromAST, generateTokenAST } from '../utils/ast';
+import { sanitizeClassName } from '../utils/classname';
 import { traverseClassName } from '../utils/traverse';
 
 const pattern = / *\.(?<selector>\S+?)\{/;
@@ -26,8 +27,10 @@ export default ESLintUtils.RuleCreator((name) => name)({
   create: (context) => {
     return traverseClassName({
       rule: 'class-names-order',
-      visitor: async (node, className) => {
-        const expandedClassName = expandVariantGroup(className);
+      visitor: (node, className) => {
+        const sanitizedClassName = sanitizeClassName(className);
+
+        const expandedClassName = expandVariantGroup(sanitizedClassName);
         const css = generateCSS(expandedClassName);
 
         const classNames = expandedClassName.split(' ');
@@ -51,13 +54,17 @@ export default ESLintUtils.RuleCreator((name) => name)({
         const ast = generateTokenAST(classNames);
         const orderedClassName = generateClassNameFromAST(ast);
 
-        if (className !== orderedClassName) {
+        if (sanitizedClassName !== orderedClassName) {
           context.report({
             node,
             messageId: 'invalidOrder',
             fix: (fixer) => fixer.replaceText(node, `'${orderedClassName}'`),
           });
+
+          return false;
         }
+
+        return true;
       },
     });
   },

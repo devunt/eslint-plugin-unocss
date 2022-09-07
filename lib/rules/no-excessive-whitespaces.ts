@@ -1,36 +1,33 @@
 import { ESLintUtils } from '@typescript-eslint/utils';
-import { expandVariantGroup } from '@unocss/core';
 
-import { uniq } from '../utils/array';
 import { sanitizeClassName } from '../utils/classname';
 import { traverseClassName } from '../utils/traverse';
 
 export default ESLintUtils.RuleCreator((name) => name)({
-  name: 'duplicated-class-names',
+  name: 'no-excessive-whitespaces',
   meta: {
     type: 'layout',
-    fixable: 'code',
+    fixable: 'whitespace',
     docs: {
-      description: 'Find duplicated classnames',
+      description: 'Find excessive whitespaces in classnames',
       recommended: false,
     },
     messages: {
-      classNameDuplicated: 'Class name is duplicated',
+      'excessive-whitespaces': 'excessive whitespaces in classnames',
     },
     schema: [],
   },
   defaultOptions: [],
   create: (context) => {
     return traverseClassName({
-      rule: 'duplicated-class-names',
+      rule: 'no-excessive-whitespaces',
       visitor: (node, className) => {
-        const classNames = sanitizeClassName(expandVariantGroup(className)).split(' ');
-        const uniqueClassNames = uniq(classNames);
-
-        if (classNames.length !== uniqueClassNames.length) {
+        const sanitizedClassName = sanitizeClassName(className);
+        if (className !== sanitizedClassName) {
           context.report({
             node,
-            messageId: 'classNameDuplicated',
+            messageId: 'excessive-whitespaces',
+            fix: (fixer) => fixer.replaceText(node, `'${sanitizedClassName}'`),
           });
 
           return false;
